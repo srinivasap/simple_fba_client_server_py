@@ -1,0 +1,2 @@
+pickledb==0.8.1
+twisted==18.7.0
