@@ -31,7 +31,7 @@ class FBAClient(DatagramProtocol):
 Main - the entry point
 """
 if __name__ == '__main__':
-    reactor.listenUDP(0, FBAClient(sys.argv[1]))
+    reactor.listenUDP(65101, FBAClient(sys.argv[1]))
     reactor.run()
 
 

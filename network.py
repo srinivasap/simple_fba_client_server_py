@@ -3,7 +3,7 @@ import time
 import math
 import hashlib
 import json
-from socket import socketpair
+from socket import *
 import urllib.parse
 import uuid
 
@@ -293,12 +293,12 @@ class LocalTransport(BaseTransport):
         return
 
     def data_receive(self, data):
-        self.receive(data.decode())
+        self.receive(data)
 
         return
 
     def receive(self, data):
-        log.transport.debug('%s: received: %s', self.name, data.encode())
+        log.main.debug('%s: received: %s', self.name, data)
 
         if '\r\n\r\n' not in data:
             self.buf.append(data)
@@ -334,14 +334,19 @@ class LocalTransport(BaseTransport):
         return
 
     def write(self, data):
-        log.transport.debug('%s: wrote: %s', self.name, data.encode())
-
-        return self.wsock.send(data.encode())
+        log.transport.debug('%s: wrote: %s', self.name, data)
+        sock = socket(AF_INET, SOCK_DGRAM) # UDP
+        index = self.endpoint.uri.rfind(':')
+        port = int(self.endpoint.uri[index+1:])
+        log.transport.debug('%s to 127.0.0.1:%s', self.endpoint.uri, port)
+        #return sock.sendto(data.encode(), ('127.0.0.1', port))
+        return sock.sendto(data, ('127.0.0.1', port))
+        #return self.wsock.send(data.encode())
 
     def send(self, endpoint, data):
-        assert isinstance(endpoint, Endpoint)
+        #assert isinstance(endpoint, Endpoint)
 
-        log.transport.debug('%s: send: %s', self.name, data.strip().encode())
+        log.transport.debug('%s: send: %s', self.name, data.strip())
 
         LOCAL_TRANSPORT_LIST[endpoint.uri].write(data)
 
@@ -370,16 +375,16 @@ class UDPTransport(BaseTransport):
 
         self.loop = loop
         self.buf = list()
-        LOCAL_TRANSPORT_LIST[self.endpoint.uri] = self
         self.host = host
         self.port = port
-
+        LOCAL_TRANSPORT_LIST[self.endpoint.uri] = self
+        
     def start(self, *a, **kw):
         super(UDPTransport, self).start(*a, **kw)
 
         self.rsock, self.wsock = socketpair()
 
-        conn = self.loop.create_connection(UDPTransportProtocol, host=self.host, port=self.port)
+        conn = self.loop.create_connection(UDPTransportProtocol, sock=self.rsock)
         _, self.protocol = self.loop.run_until_complete(conn)
         self.protocol.data_received = self.data_receive
 
@@ -429,7 +434,8 @@ class UDPTransport(BaseTransport):
     def write(self, data):
         log.transport.debug('%s: wrote: %s', self.name, data.encode())
 
-        return self.wsock.send(data.encode())
+        sock = socket(AF_INET, SOCK_DGRAM) # UDP
+        return sock.sendto(data.encode(), (self.host, self.port))
 
     def send(self, endpoint, data):
         assert isinstance(endpoint, Endpoint)

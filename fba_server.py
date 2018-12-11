@@ -15,6 +15,7 @@ from twisted.internet import reactor
 from fba_consensus import Consensus
 from network import (
     BaseServer,
+    UDPTransport,
     LocalTransport,
     Message,
     Node,
@@ -25,6 +26,15 @@ from util import (
 )
 
 MESSAGE = None
+loop = None
+host = '127.0.0.1'
+iport = None
+sport = None
+client_config = None
+client_node = None
+this_node_name = None
+msg_proceeded_by_this_node = []
+allowed_ports = [65101, 3000, 3000, 3001, 3002, 3003]
 
 async def check_message_in_storage(node):
     global MESSAGE
@@ -61,9 +71,9 @@ async def check_message_in_storage(node):
 
     check_message_in_storage.is_running = False
 
-    MESSAGE = Message.new(uuid1().hex)
-    servers['n0'].transport.send(nodes['n0'].endpoint, MESSAGE.serialize(client0_node))
-    log.main.info('inject message %s -> n0: %s', client0_node.name, MESSAGE)
+    #MESSAGE = Message.new(uuid1().hex)
+    #servers['n0'].transport.send(nodes['n0'].endpoint, MESSAGE.serialize(client_node))
+    #log.main.info('inject message %s -> n0: %s', client_node.name, MESSAGE)
 
     return
 
@@ -117,13 +127,24 @@ class FBAServerMain(DatagramProtocol):
         self.server_port = port
 
     def datagramReceived(self, data, address):
+        # if repeat message received, ignore
+        #print("{} in {}".format(str(data), msg_proceeded_by_this_node))
+        if data.hex() in msg_proceeded_by_this_node:
+            return
+        msg_proceeded_by_this_node.append(data.hex())
+
         print("Data %s received from %s on port %s" % (repr(data), repr(address), self.server_port))
         self.transport.write(data, address)
-        # TODO - publish message for concensus
-        this_node_name = node_name_port_mapping[self.server_port]
-        MESSAGE = Message.new(uuid1().hex)
-        servers[this_node_name].transport.send(nodes[this_node_name].endpoint, MESSAGE.serialize(client0_node))
-        log.main.info('Injected message %s -> %s: %s', client0_node.name, this_node_name, MESSAGE)
+        client_addr = int(address[1])
+        next_port = self.server_port + 1
+        if next_port > 3003:
+            next_port = 3000
+        next_name_name = node_name_port_mapping[next_port]
+        #MESSAGE = Message.new(str(data))
+        #servers[next_name_name].transport.send(nodes[next_name_name].endpoint, MESSAGE.serialize(nodes[this_node_name]))
+        servers[next_name_name].transport.send(nodes[next_name_name].endpoint, data)
+        log.main.info('Injected message %s -> %s: %s', client_node.name, this_node_name, str(data))
+        # store data to db
         sdata = str(data)
         index = sdata.find(':')
         key = str(sdata[2:index])
@@ -134,14 +155,10 @@ class FBAServerMain(DatagramProtocol):
             db.set(key,new_value)
         else:
             db.set(key,value)
-
-async def start_udp_listerner():
-    reactor.run()
-
-def worker():
-    loop2 = asyncio.new_event_loop()
-    loop2.run_until_complete(start_udp_listerner())
-    return
+        
+def start_udp_listerner():
+    reactor.listenUDP(iport, FBAServerMain(iport))
+    reactor.run(installSignalHandlers=0)
 
 """
 Main - the entry point
@@ -152,16 +169,16 @@ if __name__ == '__main__':
     nodes = 4 # number of validator nodes in the same quorum
     trs = 80 # check threshold
 
-    client0_config = NodeConfig('client', None, None, None)
-    client0_node = Node(client0_config.name, client0_config.endpoint, None, client0_config.port,)
-    log.main.debug('client node created: %s', client0_node)
+    client_config = NodeConfig('client', None, None, None)
+    client_node = Node(client_config.name, client_config.endpoint, None, client_config.port,)
+    log.main.debug('client node created: %s', client_node)
 
     node_name_port_mapping = dict()
     nodes_config = dict()
     for i in range(nodes):
         name = 'n%d' % i
-        endpoint = 'sock://memory:%d' % i
         port = 3000 + i
+        endpoint = 'sock://127.0.0.1:%d' % port
         nodes_config[name] = NodeConfig(name, endpoint, port, trs)
         node_name_port_mapping[port] = name
 
@@ -185,6 +202,7 @@ if __name__ == '__main__':
         nodes[name] = Node(name, config.endpoint, quorums[name], config.port)
         log.main.debug('nodes created: %s', nodes)
 
+        #transports[name] = UDPTransport(name, config.endpoint, loop, host, config.port)
         transports[name] = LocalTransport(name, config.endpoint, loop)
         log.main.debug('transports created: %s', transports)
 
@@ -194,24 +212,30 @@ if __name__ == '__main__':
         servers[name] = Server(nodes[name], consensuses[name], name, transport=transports[name])
         log.main.debug('servers created: %s', servers)
     
-    server_port = sys.argv[1]
+    sport = sys.argv[1]
+    iport = int(sport)
+    allowed_ports.remove(iport) # for this server
     # start this node server
-    this_node_name = node_name_port_mapping[int(server_port)]
+    this_node_name = node_name_port_mapping[iport]
     servers[this_node_name].start()
 
     try:
         # load db
-        db_name = 'assignment3_'+server_port+'.db'
+        db_name = 'assignment3_'+sport+'.db'
         db = pickledb.load(db_name, True)
         db.dump()
-        # start udp server
-        reactor.listenUDP(int(sys.argv[1]), FBAServerMain(int(sys.argv[1])))
-        reactor.run()
-        #threads = []
-        #t = Thread(target=worker)
-        #threads.append(t)
-        #t.start()
-        #loop.run_forever()
+        
+        # start udp listener on a separate thread
+        threads = []
+        t = Thread(target=start_udp_listerner)
+        threads.append(t)
+        t.start()
+        
+        #MESSAGE = Message.new(uuid1().hex)
+        #servers[this_node_name].transport.send(nodes[this_node_name].endpoint, MESSAGE.serialize(client_node))
+        #log.main.info('Injected message %s -> %s: %s', client_node.name, this_node_name, MESSAGE)
+
+        loop.run_forever()
     except (KeyboardInterrupt, SystemExit):
         log.main.debug('goodbye~')
         sys.exit(1)
