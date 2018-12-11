@@ -5,6 +5,7 @@ import asyncio
 import collections
 import logging
 import sys
+import pickledb
 from uuid import uuid1
 from threading import Thread
 
@@ -123,6 +124,16 @@ class FBAServerMain(DatagramProtocol):
         MESSAGE = Message.new(uuid1().hex)
         servers[this_node_name].transport.send(nodes[this_node_name].endpoint, MESSAGE.serialize(client0_node))
         log.main.info('Injected message %s -> %s: %s', client0_node.name, this_node_name, MESSAGE)
+        sdata = str(data)
+        index=sdata.find(':')
+        key=str(sdata[:index])
+        value=int(sdata[index+2:])
+        if db.get(key):
+            old_value=db.get(key)
+            new_value=old_value+value
+            db.set(key,new_value)
+        else:
+            db.set(key,value)
 
 async def start_udp_listerner():
     reactor.run()
@@ -188,20 +199,19 @@ if __name__ == '__main__':
     this_node_name = node_name_port_mapping[int(sys.argv[1])]
     servers[this_node_name].start()
 
-    # send message to `server0`
-    #MESSAGE = Message.new(uuid1().hex)
-    #servers[this_node_name].transport.send(nodes[this_node_name].endpoint, MESSAGE.serialize(client0_node))
-    #log.main.info('inject message %s -> n0: %s', client0_node.name, MESSAGE)
-
     try:
+        # load db
+        db_name='assignment3_'+str(sys.argv[1])+'.db'
+        db=pickledb.load(db_name, True)
+        db.dump()
+        # start udp server
         reactor.listenUDP(int(sys.argv[1]), FBAServerMain(int(sys.argv[1])))
-        #reactor.run()
-        threads = []
-        t = Thread(target=worker)
-        threads.append(t)
-        t.start()
-
-        loop.run_forever()
+        reactor.run()
+        #threads = []
+        #t = Thread(target=worker)
+        #threads.append(t)
+        #t.start()
+        #loop.run_forever()
     except (KeyboardInterrupt, SystemExit):
         log.main.debug('goodbye~')
         sys.exit(1)

@@ -12,7 +12,6 @@ from util import (
     BaseEnum,
 )
 
-
 class Storage:
     messages = None
     message_ids = None
