@@ -125,9 +125,9 @@ class FBAServerMain(DatagramProtocol):
         servers[this_node_name].transport.send(nodes[this_node_name].endpoint, MESSAGE.serialize(client0_node))
         log.main.info('Injected message %s -> %s: %s', client0_node.name, this_node_name, MESSAGE)
         sdata = str(data)
-        index=sdata.find(':')
-        key=str(sdata[:index])
-        value=int(sdata[index+2:])
+        index = sdata.find(':')
+        key = str(sdata[2:index])
+        value = int(sdata[index+2 : len(sdata)-1])
         if db.get(key):
             old_value=db.get(key)
             new_value=old_value+value
@@ -194,15 +194,15 @@ if __name__ == '__main__':
         servers[name] = Server(nodes[name], consensuses[name], name, transport=transports[name])
         log.main.debug('servers created: %s', servers)
     
-    server_port = int(sys.argv[1])
+    server_port = sys.argv[1]
     # start this node server
-    this_node_name = node_name_port_mapping[int(sys.argv[1])]
+    this_node_name = node_name_port_mapping[int(server_port)]
     servers[this_node_name].start()
 
     try:
         # load db
-        db_name='assignment3_'+str(sys.argv[1])+'.db'
-        db=pickledb.load(db_name, True)
+        db_name = 'assignment3_'+server_port+'.db'
+        db = pickledb.load(db_name, True)
         db.dump()
         # start udp server
         reactor.listenUDP(int(sys.argv[1]), FBAServerMain(int(sys.argv[1])))
