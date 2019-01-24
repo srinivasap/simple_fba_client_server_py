@@ -1,0 +1,31 @@
+python setup.py develop
+running develop
+running egg_info
+writing requirements to src/simple_fba.egg-info/requires.txt
+writing src/simple_fba.egg-info/PKG-INFO
+writing top-level names to src/simple_fba.egg-info/top_level.txt
+writing dependency_links to src/simple_fba.egg-info/dependency_links.txt
+reading manifest file 'src/simple_fba.egg-info/SOURCES.txt'
+writing manifest file 'src/simple_fba.egg-info/SOURCES.txt'
+running build_ext
+Creating /usr/local/lib/python2.7/site-packages/simple-fba.egg-link (link to src)
+Adding simple-fba 0.2+2ff01de to easy-install.pth file
+Installing simple-fba-simulator.py script to /usr/local/bin
+
+Installed /Users/z001hmr/MSSE/Fall2018/CMPE273-EntDistSystems/Talk/simple-fba/src
+Processing dependencies for simple-fba==0.2+2ff01de
+Searching for colorlog
+Reading https://pypi.org/simple/colorlog/
+Downloading https://files.pythonhosted.org/packages/69/eb/58ae10d3c46a0195ffdd0e3943d255d0d5029d71e5457785ecd665bcf0f3/colorlog-3.1.4-py2.py3-none-any.whl#sha256=8b234ebae1ba1237bc79c0d5f1f47b31a3f3e90c0b4c2b0ebdde63a174d3b97b
+Best match: colorlog 3.1.4
+Processing colorlog-3.1.4-py2.py3-none-any.whl
+Installing colorlog-3.1.4-py2.py3-none-any.whl to /usr/local/lib/python2.7/site-packages
+Adding colorlog 3.1.4 to easy-install.pth file
+
+Installed /usr/local/lib/python2.7/site-packages/colorlog-3.1.4-py2.7.egg
+Finished processing dependencies for simple-fba==0.2+2ff01de
+
+
+pip install asyncio
+
+

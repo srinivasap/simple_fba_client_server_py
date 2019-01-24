@@ -1,0 +1,478 @@
+z001hmr@88e9fe511b8c simple-fba (master) $ python3 setup.py develop
+running develop
+running egg_info
+writing src/simple_fba.egg-info/PKG-INFO
+writing dependency_links to src/simple_fba.egg-info/dependency_links.txt
+writing requirements to src/simple_fba.egg-info/requires.txt
+writing top-level names to src/simple_fba.egg-info/top_level.txt
+reading manifest file 'src/simple_fba.egg-info/SOURCES.txt'
+writing manifest file 'src/simple_fba.egg-info/SOURCES.txt'
+running build_ext
+Creating /usr/local/lib/python3.7/site-packages/simple-fba.egg-link (link to src)
+Adding simple-fba 0.2+2ff01de to easy-install.pth file
+Installing simple-fba-simulator.py script to /usr/local/bin
+
+Installed /Users/z001hmr/MSSE/Fall2018/CMPE273-EntDistSystems/Talk/simple-fba/src
+Processing dependencies for simple-fba==0.2+2ff01de
+Searching for colorlog
+Reading https://pypi.org/simple/colorlog/
+Downloading https://files.pythonhosted.org/packages/69/eb/58ae10d3c46a0195ffdd0e3943d255d0d5029d71e5457785ecd665bcf0f3/colorlog-3.1.4-py2.py3-none-any.whl#sha256=8b234ebae1ba1237bc79c0d5f1f47b31a3f3e90c0b4c2b0ebdde63a174d3b97b
+Best match: colorlog 3.1.4
+Processing colorlog-3.1.4-py2.py3-none-any.whl
+Installing colorlog-3.1.4-py2.py3-none-any.whl to /usr/local/lib/python3.7/site-packages
+Adding colorlog 3.1.4 to easy-install.pth file
+
+Installed /usr/local/lib/python3.7/site-packages/colorlog-3.1.4-py3.7.egg
+Finished processing dependencies for simple-fba==0.2+2ff01de
+
+
+pip3 install asyncio
+
+
+z001hmr@88e9fe511b8c simple-fba (master) $ python3 /usr/local/bin/simple-fba-simulator.py -h
+usage: simple-fba-simulator.py [-h] [-s] [-nodes NODES] [-trs TRS]
+
+optional arguments:
+  -h, --help    show this help message and exit
+  -s            turn off the debug messages
+  -nodes NODES  number of validator nodes in the same quorum; default 4
+  -trs TRS      threshold; 0 < trs <= 100
+
+
+
+ z001hmr@88e9fe511b8c simple-fba (master) $ python3 /usr/local/bin/simple-fba-simulator.py
+513.630867 - MAIN - options: Namespace(nodes=4, silent=False, trs=80)
+513.854027 - MAIN - client node created: <Node: client0>
+513.956070 - MAIN - client node created: <Node: client1>
+514.039040 - MAIN - node configs created: {'n0': NodeConfig(name='n0', endpoint='sock://memory:0', threshold=80), 'n1': NodeConfig(name='n1', endpoint='sock://memory:1', threshold=80), 'n2': NodeConfig(name='n2', endpoint='sock://memory:2', threshold=80), 'n3': NodeConfig(name='n3', endpoint='sock://memory:3', threshold=80)}
+514.312983 - MAIN - quorums created: {'n0': <Quorum: threshold=80 validators=[<Node: n1>, <Node: n2>, <Node: n3>]>, 'n1': <Quorum: threshold=80 validators=[<Node: n0>, <Node: n2>, <Node: n3>]>, 'n2': <Quorum: threshold=80 validators=[<Node: n0>, <Node: n1>, <Node: n3>]>, 'n3': <Quorum: threshold=80 validators=[<Node: n0>, <Node: n1>, <Node: n2>]>}
+514.619827 - MAIN - nodes created: {'n0': <Node: n0>}
+514.706850 - MAIN - transports created: {'n0': <simple_fba.network.LocalTransport object at 0x110a1c080>}
+514.802933 - BALLOT - n0: state changed `none` -> `init`
+514.864206 - CONSENSUS - n0: initially set state to State.init
+514.911890 - MAIN - consensuses created: {'n0': <Consensus: node=<Node: n0> quorum=<Quorum: threshold=80 validators=[<Node: n1>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c080>>}
+514.982939 - MAIN - servers created: {'n0': <Server: node=<Node: n0> consensus=<Consensus: node=<Node: n0> quorum=<Quorum: threshold=80 validators=[<Node: n1>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c080>>>}
+515.077829 - MAIN - nodes created: {'n0': <Node: n0>, 'n1': <Node: n1>}
+515.141964 - MAIN - transports created: {'n0': <simple_fba.network.LocalTransport object at 0x110a1c080>, 'n1': <simple_fba.network.LocalTransport object at 0x110a1c2b0>}
+515.285969 - BALLOT - n1: state changed `none` -> `init`
+515.338898 - CONSENSUS - n1: initially set state to State.init
+515.386105 - MAIN - consensuses created: {'n0': <Consensus: node=<Node: n0> quorum=<Quorum: threshold=80 validators=[<Node: n1>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c080>>, 'n1': <Consensus: node=<Node: n1> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c2b0>>}
+515.472889 - MAIN - servers created: {'n0': <Server: node=<Node: n0> consensus=<Consensus: node=<Node: n0> quorum=<Quorum: threshold=80 validators=[<Node: n1>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c080>>>, 'n1': <Server: node=<Node: n1> consensus=<Consensus: node=<Node: n1> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c2b0>>>}
+515.580893 - MAIN - nodes created: {'n0': <Node: n0>, 'n1': <Node: n1>, 'n2': <Node: n2>}
+515.659094 - MAIN - transports created: {'n0': <simple_fba.network.LocalTransport object at 0x110a1c080>, 'n1': <simple_fba.network.LocalTransport object at 0x110a1c2b0>, 'n2': <simple_fba.network.LocalTransport object at 0x1109ffd30>}
+515.723944 - BALLOT - n2: state changed `none` -> `init`
+515.770912 - CONSENSUS - n2: initially set state to State.init
+515.819073 - MAIN - consensuses created: {'n0': <Consensus: node=<Node: n0> quorum=<Quorum: threshold=80 validators=[<Node: n1>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c080>>, 'n1': <Consensus: node=<Node: n1> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c2b0>>, 'n2': <Consensus: node=<Node: n2> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n1>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x1109ffd30>>}
+515.906096 - MAIN - servers created: {'n0': <Server: node=<Node: n0> consensus=<Consensus: node=<Node: n0> quorum=<Quorum: threshold=80 validators=[<Node: n1>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c080>>>, 'n1': <Server: node=<Node: n1> consensus=<Consensus: node=<Node: n1> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c2b0>>>, 'n2': <Server: node=<Node: n2> consensus=<Consensus: node=<Node: n2> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n1>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x1109ffd30>>>}
+516.001940 - MAIN - nodes created: {'n0': <Node: n0>, 'n1': <Node: n1>, 'n2': <Node: n2>, 'n3': <Node: n3>}
+516.067028 - MAIN - transports created: {'n0': <simple_fba.network.LocalTransport object at 0x110a1c080>, 'n1': <simple_fba.network.LocalTransport object at 0x110a1c2b0>, 'n2': <simple_fba.network.LocalTransport object at 0x1109ffd30>, 'n3': <simple_fba.network.LocalTransport object at 0x110a1c550>}
+516.139030 - BALLOT - n3: state changed `none` -> `init`
+516.192913 - CONSENSUS - n3: initially set state to State.init
+516.263962 - MAIN - consensuses created: {'n0': <Consensus: node=<Node: n0> quorum=<Quorum: threshold=80 validators=[<Node: n1>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c080>>, 'n1': <Consensus: node=<Node: n1> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c2b0>>, 'n2': <Consensus: node=<Node: n2> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n1>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x1109ffd30>>, 'n3': <Consensus: node=<Node: n3> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n1>, <Node: n2>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c550>>}
+516.350985 - MAIN - servers created: {'n0': <Server: node=<Node: n0> consensus=<Consensus: node=<Node: n0> quorum=<Quorum: threshold=80 validators=[<Node: n1>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c080>>>, 'n1': <Server: node=<Node: n1> consensus=<Consensus: node=<Node: n1> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n2>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c2b0>>>, 'n2': <Server: node=<Node: n2> consensus=<Consensus: node=<Node: n2> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n1>, <Node: n3>]> transport=<simple_fba.network.LocalTransport object at 0x1109ffd30>>>, 'n3': <Server: node=<Node: n3> consensus=<Consensus: node=<Node: n3> quorum=<Quorum: threshold=80 validators=[<Node: n0>, <Node: n1>, <Node: n2>]> transport=<simple_fba.network.LocalTransport object at 0x110a1c550>>>}
+516.434908 - SERVER - n0: trying to start server
+516.772032 - SERVER - n0: server started
+516.830921 - SERVER - n1: trying to start server
+517.040014 - SERVER - n1: server started
+517.096996 - SERVER - n2: trying to start server
+517.299891 - SERVER - n2: server started
+517.355919 - SERVER - n3: trying to start server
+517.554998 - SERVER - n3: server started
+517.966986 - MAIN - inject message client0 -> n0: <Message: node=None message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+518.213034 - SERVER - n0: received: ['{"message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "node": "client0", "type_name": "message"}']
+518.292904 - SERVER - n0: hand over message to consensus: {"message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "node": "client0", "type_name": "message"}
+518.391132 - CONSENSUS - n0: received data: {"message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "node": "client0", "type_name": "message"}
+518.495083 - CONSENSUS - n0: received data is <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+518.577814 - CONSENSUS - n0: received message: <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+518.747807 - BALLOT - n0: <Node: n0> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+518.874168 - CONSENSUS - n0: broadcast ballot_message initially: {"type_name": "ballot-message", "node": "n0", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+519.162178 - SERVER - n1: received: ['{"type_name": "ballot-message", "node": "n0", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+519.229889 - SERVER - n1: hand over message to consensus: {"type_name": "ballot-message", "node": "n0", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+519.280195 - CONSENSUS - n1: received data: {"type_name": "ballot-message", "node": "n0", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+519.409895 - CONSENSUS - n1: received data is <BallotMessage: node=<Node: n0> state=State.init result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+519.504786 - CONSENSUS - n1: State.init: received ballot_message: <BallotMessage: node=<Node: n0> state=State.init result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+519.599199 - CONSENSUS - n1: ballot is empty?: True
+519.654989 - CONSENSUS - n1: ballot_message is valid?: True
+519.705057 - BALLOT - n1: <Node: n0> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+519.773006 - BALLOT - n1: threshold checked: threshold=80 voted=[('n0', 'Y')] minimum_quorum=4 agreed=1 is_passed=False
+519.823074 - CONSENSUS - n1: is passed threshold?: False: <BallotMessage: node=<Node: n0> state=State.init result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+519.888878 - BALLOT - n1: <Node: n1> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+520.005941 - CONSENSUS - n1: new ballot broadcasted: <Ballot: node=<Node: n1> state=State.init voted={2: {'n0': <BallotVoteResult.agree: 'Y'>, 'n1': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+520.250797 - SERVER - n2: received: ['{"type_name": "ballot-message", "node": "n0", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n1", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+520.308018 - SERVER - n2: hand over message to consensus: {"type_name": "ballot-message", "node": "n0", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+520.359993 - CONSENSUS - n2: received data: {"type_name": "ballot-message", "node": "n0", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+520.507812 - CONSENSUS - n2: received data is <BallotMessage: node=<Node: n0> state=State.init result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+520.581007 - CONSENSUS - n2: State.init: received ballot_message: <BallotMessage: node=<Node: n0> state=State.init result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+520.652056 - CONSENSUS - n2: ballot is empty?: True
+520.717144 - CONSENSUS - n2: ballot_message is valid?: True
+520.774841 - BALLOT - n2: <Node: n0> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+520.858765 - BALLOT - n2: threshold checked: threshold=80 voted=[('n0', 'Y')] minimum_quorum=4 agreed=1 is_passed=False
+520.910025 - CONSENSUS - n2: is passed threshold?: False: <BallotMessage: node=<Node: n0> state=State.init result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+520.969868 - BALLOT - n2: <Node: n2> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+521.085024 - CONSENSUS - n2: new ballot broadcasted: <Ballot: node=<Node: n2> state=State.init voted={2: {'n0': <BallotVoteResult.agree: 'Y'>, 'n2': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+521.165133 - SERVER - n2: hand over message to consensus: {"type_name": "ballot-message", "node": "n1", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+521.234989 - CONSENSUS - n2: received data: {"type_name": "ballot-message", "node": "n1", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+521.415949 - CONSENSUS - n2: received data is <BallotMessage: node=<Node: n1> state=State.init result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+521.481037 - CONSENSUS - n2: State.init: received ballot_message: <BallotMessage: node=<Node: n1> state=State.init result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+521.540165 - CONSENSUS - n2: ballot is empty?: False
+521.586895 - CONSENSUS - n2: ballot_message is valid?: True
+521.636009 - BALLOT - n2: <Node: n1> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+521.744967 - BALLOT - n2: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+521.818161 - CONSENSUS - n2: is passed threshold?: False: <BallotMessage: node=<Node: n1> state=State.init result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+522.197008 - SERVER - n3: received: ['{"type_name": "ballot-message", "node": "n0", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n1", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n2", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+522.276163 - SERVER - n3: hand over message to consensus: {"type_name": "ballot-message", "node": "n0", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+522.331953 - CONSENSUS - n3: received data: {"type_name": "ballot-message", "node": "n0", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+522.456169 - CONSENSUS - n3: received data is <BallotMessage: node=<Node: n0> state=State.init result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+522.533178 - CONSENSUS - n3: State.init: received ballot_message: <BallotMessage: node=<Node: n0> state=State.init result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+522.652864 - CONSENSUS - n3: ballot is empty?: True
+522.758961 - CONSENSUS - n3: ballot_message is valid?: True
+522.814989 - BALLOT - n3: <Node: n0> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+522.897005 - BALLOT - n3: threshold checked: threshold=80 voted=[('n0', 'Y')] minimum_quorum=4 agreed=1 is_passed=False
+522.958040 - CONSENSUS - n3: is passed threshold?: False: <BallotMessage: node=<Node: n0> state=State.init result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+523.022175 - BALLOT - n3: <Node: n3> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+523.186922 - CONSENSUS - n3: new ballot broadcasted: <Ballot: node=<Node: n3> state=State.init voted={2: {'n0': <BallotVoteResult.agree: 'Y'>, 'n3': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+523.267984 - SERVER - n3: hand over message to consensus: {"type_name": "ballot-message", "node": "n1", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+523.319006 - CONSENSUS - n3: received data: {"type_name": "ballot-message", "node": "n1", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+523.477077 - CONSENSUS - n3: received data is <BallotMessage: node=<Node: n1> state=State.init result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+523.571968 - CONSENSUS - n3: State.init: received ballot_message: <BallotMessage: node=<Node: n1> state=State.init result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+523.689985 - CONSENSUS - n3: ballot is empty?: False
+523.753881 - CONSENSUS - n3: ballot_message is valid?: True
+523.811102 - BALLOT - n3: <Node: n1> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+523.895979 - BALLOT - n3: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+523.957968 - CONSENSUS - n3: is passed threshold?: False: <BallotMessage: node=<Node: n1> state=State.init result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+524.065971 - SERVER - n3: hand over message to consensus: {"type_name": "ballot-message", "node": "n2", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+524.165869 - CONSENSUS - n3: received data: {"type_name": "ballot-message", "node": "n2", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+524.331093 - CONSENSUS - n3: received data is <BallotMessage: node=<Node: n2> state=State.init result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+524.402857 - CONSENSUS - n3: State.init: received ballot_message: <BallotMessage: node=<Node: n2> state=State.init result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+524.467945 - CONSENSUS - n3: ballot is empty?: False
+524.523973 - CONSENSUS - n3: ballot_message is valid?: True
+524.585962 - BALLOT - n3: <Node: n2> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+524.652958 - BALLOT - n3: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+524.716139 - CONSENSUS - n3: is passed threshold?: True: <BallotMessage: node=<Node: n2> state=State.init result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+524.791956 - BALLOT - n3: state changed `init` -> `sign`
+524.873018 - BALLOT - n3: <Node: n3> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+525.050879 - CONSENSUS - n3: new ballot broadcasted: <Ballot: node=<Node: n3> state=State.sign voted={3: {'n3': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+525.442123 - SERVER - n1: received: ['{"type_name": "ballot-message", "node": "n2", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n3", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n3", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+525.508165 - SERVER - n1: hand over message to consensus: {"type_name": "ballot-message", "node": "n2", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+525.560141 - CONSENSUS - n1: received data: {"type_name": "ballot-message", "node": "n2", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+525.671959 - CONSENSUS - n1: received data is <BallotMessage: node=<Node: n2> state=State.init result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+525.734901 - CONSENSUS - n1: State.init: received ballot_message: <BallotMessage: node=<Node: n2> state=State.init result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+525.797844 - CONSENSUS - n1: ballot is empty?: False
+525.845051 - CONSENSUS - n1: ballot_message is valid?: True
+525.893211 - BALLOT - n1: <Node: n2> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+525.954008 - BALLOT - n1: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+526.004076 - CONSENSUS - n1: is passed threshold?: False: <BallotMessage: node=<Node: n2> state=State.init result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+526.057959 - SERVER - n1: hand over message to consensus: {"type_name": "ballot-message", "node": "n3", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+526.102066 - CONSENSUS - n1: received data: {"type_name": "ballot-message", "node": "n3", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+526.199102 - CONSENSUS - n1: received data is <BallotMessage: node=<Node: n3> state=State.init result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+526.257992 - CONSENSUS - n1: State.init: received ballot_message: <BallotMessage: node=<Node: n3> state=State.init result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+526.314020 - CONSENSUS - n1: ballot is empty?: False
+526.360035 - CONSENSUS - n1: ballot_message is valid?: True
+526.408911 - BALLOT - n1: <Node: n3> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+526.468039 - BALLOT - n1: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+526.525974 - CONSENSUS - n1: is passed threshold?: True: <BallotMessage: node=<Node: n3> state=State.init result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+526.601076 - BALLOT - n1: state changed `init` -> `sign`
+526.671886 - BALLOT - n1: <Node: n1> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+526.800871 - CONSENSUS - n1: new ballot broadcasted: <Ballot: node=<Node: n1> state=State.sign voted={3: {'n1': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+526.866913 - SERVER - n1: hand over message to consensus: {"type_name": "ballot-message", "node": "n3", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+526.912928 - CONSENSUS - n1: received data: {"type_name": "ballot-message", "node": "n3", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+527.029991 - CONSENSUS - n1: received data is <BallotMessage: node=<Node: n3> state=State.sign result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+527.089834 - CONSENSUS - n1: State.sign: received ballot_message: <BallotMessage: node=<Node: n3> state=State.sign result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+527.147055 - CONSENSUS - n1: ballot is empty?: False
+527.197838 - CONSENSUS - n1: ballot_message is valid?: True
+527.266026 - BALLOT - n1: <Node: n3> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+527.338982 - BALLOT - n1: threshold checked: threshold=80 voted=[('n1', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=2 is_passed=False
+527.405024 - CONSENSUS - n1: is passed threshold?: False: <BallotMessage: node=<Node: n3> state=State.sign result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+527.728796 - SERVER - n2: received: ['{"type_name": "ballot-message", "node": "n3", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n3", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n1", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+527.786016 - SERVER - n2: hand over message to consensus: {"type_name": "ballot-message", "node": "n3", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+527.901888 - CONSENSUS - n2: received data: {"type_name": "ballot-message", "node": "n3", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+528.035164 - CONSENSUS - n2: received data is <BallotMessage: node=<Node: n3> state=State.init result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+528.105974 - CONSENSUS - n2: State.init: received ballot_message: <BallotMessage: node=<Node: n3> state=State.init result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+528.169870 - CONSENSUS - n2: ballot is empty?: False
+528.218031 - CONSENSUS - n2: ballot_message is valid?: True
+528.271198 - BALLOT - n2: <Node: n3> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+528.335810 - BALLOT - n2: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+528.396130 - CONSENSUS - n2: is passed threshold?: True: <BallotMessage: node=<Node: n3> state=State.init result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+528.460026 - BALLOT - n2: state changed `init` -> `sign`
+528.515100 - BALLOT - n2: <Node: n2> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+528.636932 - CONSENSUS - n2: new ballot broadcasted: <Ballot: node=<Node: n2> state=State.sign voted={3: {'n2': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+528.697014 - SERVER - n2: hand over message to consensus: {"type_name": "ballot-message", "node": "n3", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+528.795958 - CONSENSUS - n2: received data: {"type_name": "ballot-message", "node": "n3", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+528.920174 - CONSENSUS - n2: received data is <BallotMessage: node=<Node: n3> state=State.sign result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+528.988838 - CONSENSUS - n2: State.sign: received ballot_message: <BallotMessage: node=<Node: n3> state=State.sign result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+529.057026 - CONSENSUS - n2: ballot is empty?: False
+529.126883 - CONSENSUS - n2: ballot_message is valid?: True
+529.206991 - BALLOT - n2: <Node: n3> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+529.285192 - BALLOT - n2: threshold checked: threshold=80 voted=[('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=2 is_passed=False
+529.356956 - CONSENSUS - n2: is passed threshold?: False: <BallotMessage: node=<Node: n3> state=State.sign result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+529.445171 - SERVER - n2: hand over message to consensus: {"type_name": "ballot-message", "node": "n1", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+529.571056 - CONSENSUS - n2: received data: {"type_name": "ballot-message", "node": "n1", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+529.731035 - CONSENSUS - n2: received data is <BallotMessage: node=<Node: n1> state=State.sign result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+529.803038 - CONSENSUS - n2: State.sign: received ballot_message: <BallotMessage: node=<Node: n1> state=State.sign result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+529.866934 - CONSENSUS - n2: ballot is empty?: False
+529.917955 - CONSENSUS - n2: ballot_message is valid?: True
+529.968023 - BALLOT - n2: <Node: n1> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+530.031204 - BALLOT - n2: threshold checked: threshold=80 voted=[('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+530.084133 - CONSENSUS - n2: is passed threshold?: False: <BallotMessage: node=<Node: n1> state=State.sign result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+530.627012 - SERVER - n0: received: ['{"type_name": "ballot-message", "node": "n1", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n2", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n3", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n3", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n1", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n2", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+530.735016 - SERVER - n0: hand over message to consensus: {"type_name": "ballot-message", "node": "n1", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+530.820131 - CONSENSUS - n0: received data: {"type_name": "ballot-message", "node": "n1", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+530.934095 - CONSENSUS - n0: received data is <BallotMessage: node=<Node: n1> state=State.init result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+530.998945 - CONSENSUS - n0: State.init: received ballot_message: <BallotMessage: node=<Node: n1> state=State.init result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+531.119108 - CONSENSUS - n0: ballot is empty?: False
+531.185865 - CONSENSUS - n0: ballot_message is valid?: True
+531.244040 - BALLOT - n0: <Node: n1> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+531.311035 - BALLOT - n0: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y')] minimum_quorum=4 agreed=2 is_passed=False
+531.361103 - CONSENSUS - n0: is passed threshold?: False: <BallotMessage: node=<Node: n1> state=State.init result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+531.418085 - SERVER - n0: hand over message to consensus: {"type_name": "ballot-message", "node": "n2", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+531.463861 - CONSENSUS - n0: received data: {"type_name": "ballot-message", "node": "n2", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+531.702995 - CONSENSUS - n0: received data is <BallotMessage: node=<Node: n2> state=State.init result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+531.779051 - CONSENSUS - n0: State.init: received ballot_message: <BallotMessage: node=<Node: n2> state=State.init result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+531.845808 - CONSENSUS - n0: ballot is empty?: False
+531.894922 - CONSENSUS - n0: ballot_message is valid?: True
+531.945944 - BALLOT - n0: <Node: n2> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+532.010078 - BALLOT - n0: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+534.341097 - CONSENSUS - n0: is passed threshold?: False: <BallotMessage: node=<Node: n2> state=State.init result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+534.478188 - SERVER - n0: hand over message to consensus: {"type_name": "ballot-message", "node": "n3", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+534.535885 - CONSENSUS - n0: received data: {"type_name": "ballot-message", "node": "n3", "state": "init", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+534.669161 - CONSENSUS - n0: received data is <BallotMessage: node=<Node: n3> state=State.init result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+534.732103 - CONSENSUS - n0: State.init: received ballot_message: <BallotMessage: node=<Node: n3> state=State.init result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+534.815073 - CONSENSUS - n0: ballot is empty?: False
+534.878016 - CONSENSUS - n0: ballot_message is valid?: True
+534.960032 - BALLOT - n0: <Node: n3> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+535.066128 - BALLOT - n0: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+535.148144 - CONSENSUS - n0: is passed threshold?: True: <BallotMessage: node=<Node: n3> state=State.init result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+535.235167 - BALLOT - n0: state changed `init` -> `sign`
+535.309076 - BALLOT - n0: <Node: n0> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+535.511017 - CONSENSUS - n0: new ballot broadcasted: <Ballot: node=<Node: n0> state=State.sign voted={3: {'n0': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+535.640001 - SERVER - n0: hand over message to consensus: {"type_name": "ballot-message", "node": "n3", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+535.718918 - CONSENSUS - n0: received data: {"type_name": "ballot-message", "node": "n3", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+535.872936 - CONSENSUS - n0: received data is <BallotMessage: node=<Node: n3> state=State.sign result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+535.938978 - CONSENSUS - n0: State.sign: received ballot_message: <BallotMessage: node=<Node: n3> state=State.sign result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+536.065102 - CONSENSUS - n0: ballot is empty?: False
+536.175013 - CONSENSUS - n0: ballot_message is valid?: True
+536.252975 - BALLOT - n0: <Node: n3> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+536.350012 - BALLOT - n0: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=2 is_passed=False
+536.406040 - CONSENSUS - n0: is passed threshold?: False: <BallotMessage: node=<Node: n3> state=State.sign result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+536.516190 - SERVER - n0: hand over message to consensus: {"type_name": "ballot-message", "node": "n1", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+536.581993 - CONSENSUS - n0: received data: {"type_name": "ballot-message", "node": "n1", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+536.715031 - CONSENSUS - n0: received data is <BallotMessage: node=<Node: n1> state=State.sign result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+536.782026 - CONSENSUS - n0: State.sign: received ballot_message: <BallotMessage: node=<Node: n1> state=State.sign result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+536.844969 - CONSENSUS - n0: ballot is empty?: False
+536.909103 - CONSENSUS - n0: ballot_message is valid?: True
+536.965132 - BALLOT - n0: <Node: n1> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+537.042856 - BALLOT - n0: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+537.107944 - CONSENSUS - n0: is passed threshold?: False: <BallotMessage: node=<Node: n1> state=State.sign result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+537.163973 - SERVER - n0: hand over message to consensus: {"type_name": "ballot-message", "node": "n2", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+537.224054 - CONSENSUS - n0: received data: {"type_name": "ballot-message", "node": "n2", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+537.344933 - CONSENSUS - n0: received data is <BallotMessage: node=<Node: n2> state=State.sign result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+537.406921 - CONSENSUS - n0: State.sign: received ballot_message: <BallotMessage: node=<Node: n2> state=State.sign result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+537.466049 - CONSENSUS - n0: ballot is empty?: False
+537.518024 - CONSENSUS - n0: ballot_message is valid?: True
+537.580013 - BALLOT - n0: <Node: n2> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+537.652016 - BALLOT - n0: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+537.722826 - CONSENSUS - n0: is passed threshold?: True: <BallotMessage: node=<Node: n2> state=State.sign result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+537.808895 - BALLOT - n0: state changed `sign` -> `accept`
+537.875891 - BALLOT - n0: <Node: n0> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+538.097858 - CONSENSUS - n0: new ballot broadcasted: <Ballot: node=<Node: n0> state=State.accept voted={4: {'n0': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+538.558006 - SERVER - n1: received: ['{"type_name": "ballot-message", "node": "n2", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n0", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n0", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+538.661003 - SERVER - n1: hand over message to consensus: {"type_name": "ballot-message", "node": "n2", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+538.722038 - CONSENSUS - n1: received data: {"type_name": "ballot-message", "node": "n2", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+538.875818 - CONSENSUS - n1: received data is <BallotMessage: node=<Node: n2> state=State.sign result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+538.954020 - CONSENSUS - n1: State.sign: received ballot_message: <BallotMessage: node=<Node: n2> state=State.sign result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+539.023161 - CONSENSUS - n1: ballot is empty?: False
+539.072037 - CONSENSUS - n1: ballot_message is valid?: True
+539.124966 - BALLOT - n1: <Node: n2> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+539.194822 - BALLOT - n1: threshold checked: threshold=80 voted=[('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+539.246082 - CONSENSUS - n1: is passed threshold?: False: <BallotMessage: node=<Node: n2> state=State.sign result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+539.304018 - SERVER - n1: hand over message to consensus: {"type_name": "ballot-message", "node": "n0", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+539.350033 - CONSENSUS - n1: received data: {"type_name": "ballot-message", "node": "n0", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+539.465904 - CONSENSUS - n1: received data is <BallotMessage: node=<Node: n0> state=State.sign result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+539.525986 - CONSENSUS - n1: State.sign: received ballot_message: <BallotMessage: node=<Node: n0> state=State.sign result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+539.586067 - CONSENSUS - n1: ballot is empty?: False
+539.633989 - CONSENSUS - n1: ballot_message is valid?: True
+539.684057 - BALLOT - n1: <Node: n0> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+539.759159 - BALLOT - n1: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+539.824009 - CONSENSUS - n1: is passed threshold?: True: <BallotMessage: node=<Node: n0> state=State.sign result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+539.891958 - BALLOT - n1: state changed `sign` -> `accept`
+539.960146 - BALLOT - n1: <Node: n1> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+540.118933 - CONSENSUS - n1: new ballot broadcasted: <Ballot: node=<Node: n1> state=State.accept voted={4: {'n1': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+540.187836 - SERVER - n1: hand over message to consensus: {"type_name": "ballot-message", "node": "n0", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+540.259123 - CONSENSUS - n1: received data: {"type_name": "ballot-message", "node": "n0", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+540.388107 - CONSENSUS - n1: received data is <BallotMessage: node=<Node: n0> state=State.accept result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+540.451050 - CONSENSUS - n1: State.accept: received ballot_message: <BallotMessage: node=<Node: n0> state=State.accept result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+540.512085 - CONSENSUS - n1: ballot is empty?: False
+540.559769 - CONSENSUS - n1: ballot_message is valid?: True
+540.698051 - BALLOT - n1: <Node: n0> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+540.835142 - BALLOT - n1: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y')] minimum_quorum=4 agreed=2 is_passed=False
+540.906906 - CONSENSUS - n1: is passed threshold?: False: <BallotMessage: node=<Node: n0> state=State.accept result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+541.256905 - SERVER - n2: received: ['{"type_name": "ballot-message", "node": "n0", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n0", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n1", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+541.324139 - SERVER - n2: hand over message to consensus: {"type_name": "ballot-message", "node": "n0", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+541.391850 - CONSENSUS - n2: received data: {"type_name": "ballot-message", "node": "n0", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+541.568041 - CONSENSUS - n2: received data is <BallotMessage: node=<Node: n0> state=State.sign result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+541.637897 - CONSENSUS - n2: State.sign: received ballot_message: <BallotMessage: node=<Node: n0> state=State.sign result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+541.703939 - CONSENSUS - n2: ballot is empty?: False
+541.755915 - CONSENSUS - n2: ballot_message is valid?: True
+541.821003 - BALLOT - n2: <Node: n0> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+541.905880 - BALLOT - n2: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+541.970968 - CONSENSUS - n2: is passed threshold?: True: <BallotMessage: node=<Node: n0> state=State.sign result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+542.050123 - BALLOT - n2: state changed `sign` -> `accept`
+542.128801 - BALLOT - n2: <Node: n2> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+542.392015 - CONSENSUS - n2: new ballot broadcasted: <Ballot: node=<Node: n2> state=State.accept voted={4: {'n2': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+542.555809 - SERVER - n2: hand over message to consensus: {"type_name": "ballot-message", "node": "n0", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+542.687893 - CONSENSUS - n2: received data: {"type_name": "ballot-message", "node": "n0", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+542.916059 - CONSENSUS - n2: received data is <BallotMessage: node=<Node: n0> state=State.accept result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+543.023109 - CONSENSUS - n2: State.accept: received ballot_message: <BallotMessage: node=<Node: n0> state=State.accept result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+543.154001 - CONSENSUS - n2: ballot is empty?: False
+543.279171 - CONSENSUS - n2: ballot_message is valid?: True
+543.356895 - BALLOT - n2: <Node: n0> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+543.446064 - BALLOT - n2: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n2', 'Y')] minimum_quorum=4 agreed=2 is_passed=False
+543.514967 - CONSENSUS - n2: is passed threshold?: False: <BallotMessage: node=<Node: n0> state=State.accept result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+543.602943 - SERVER - n2: hand over message to consensus: {"type_name": "ballot-message", "node": "n1", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+543.737173 - CONSENSUS - n2: received data: {"type_name": "ballot-message", "node": "n1", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+543.920040 - CONSENSUS - n2: received data is <BallotMessage: node=<Node: n1> state=State.accept result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+543.996811 - CONSENSUS - n2: State.accept: received ballot_message: <BallotMessage: node=<Node: n1> state=State.accept result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+544.090033 - CONSENSUS - n2: ballot is empty?: False
+544.159889 - CONSENSUS - n2: ballot_message is valid?: True
+544.235945 - BALLOT - n2: <Node: n1> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+544.348001 - BALLOT - n2: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+544.435978 - CONSENSUS - n2: is passed threshold?: False: <BallotMessage: node=<Node: n1> state=State.accept result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+545.075893 - SERVER - n3: received: ['{"type_name": "ballot-message", "node": "n1", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n2", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n0", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n0", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n1", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n2", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+545.207977 - SERVER - n3: hand over message to consensus: {"type_name": "ballot-message", "node": "n1", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+545.300961 - CONSENSUS - n3: received data: {"type_name": "ballot-message", "node": "n1", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+545.454025 - CONSENSUS - n3: received data is <BallotMessage: node=<Node: n1> state=State.sign result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+545.526981 - CONSENSUS - n3: State.sign: received ballot_message: <BallotMessage: node=<Node: n1> state=State.sign result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+545.598030 - CONSENSUS - n3: ballot is empty?: False
+545.662880 - CONSENSUS - n3: ballot_message is valid?: True
+545.714855 - BALLOT - n3: <Node: n1> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+545.794010 - BALLOT - n3: threshold checked: threshold=80 voted=[('n1', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=2 is_passed=False
+545.861006 - CONSENSUS - n3: is passed threshold?: False: <BallotMessage: node=<Node: n1> state=State.sign result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+545.917034 - SERVER - n3: hand over message to consensus: {"type_name": "ballot-message", "node": "n2", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+545.980930 - CONSENSUS - n3: received data: {"type_name": "ballot-message", "node": "n2", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+546.133041 - CONSENSUS - n3: received data is <BallotMessage: node=<Node: n2> state=State.sign result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+546.211004 - CONSENSUS - n3: State.sign: received ballot_message: <BallotMessage: node=<Node: n2> state=State.sign result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+546.300888 - CONSENSUS - n3: ballot is empty?: False
+546.410084 - CONSENSUS - n3: ballot_message is valid?: True
+546.532154 - BALLOT - n3: <Node: n2> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+546.638012 - BALLOT - n3: threshold checked: threshold=80 voted=[('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+546.736956 - CONSENSUS - n3: is passed threshold?: False: <BallotMessage: node=<Node: n2> state=State.sign result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+546.864986 - SERVER - n3: hand over message to consensus: {"type_name": "ballot-message", "node": "n0", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+546.973944 - CONSENSUS - n3: received data: {"type_name": "ballot-message", "node": "n0", "state": "sign", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+547.139168 - CONSENSUS - n3: received data is <BallotMessage: node=<Node: n0> state=State.sign result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+547.217846 - CONSENSUS - n3: State.sign: received ballot_message: <BallotMessage: node=<Node: n0> state=State.sign result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+547.322989 - CONSENSUS - n3: ballot is empty?: False
+547.387838 - CONSENSUS - n3: ballot_message is valid?: True
+547.453880 - BALLOT - n3: <Node: n0> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+547.521114 - BALLOT - n3: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+547.589779 - CONSENSUS - n3: is passed threshold?: True: <BallotMessage: node=<Node: n0> state=State.sign result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+547.658920 - BALLOT - n3: state changed `sign` -> `accept`
+547.734976 - BALLOT - n3: <Node: n3> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+547.884941 - CONSENSUS - n3: new ballot broadcasted: <Ballot: node=<Node: n3> state=State.accept voted={4: {'n3': <BallotVoteResult.agree: 'Y'>}} node_result=BallotVoteResult.agree is_broadcasted=True>
+547.952890 - SERVER - n3: hand over message to consensus: {"type_name": "ballot-message", "node": "n0", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+548.005819 - CONSENSUS - n3: received data: {"type_name": "ballot-message", "node": "n0", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+548.133135 - CONSENSUS - n3: received data is <BallotMessage: node=<Node: n0> state=State.accept result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+548.197985 - CONSENSUS - n3: State.accept: received ballot_message: <BallotMessage: node=<Node: n0> state=State.accept result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+548.274994 - CONSENSUS - n3: ballot is empty?: False
+548.376083 - CONSENSUS - n3: ballot_message is valid?: True
+548.485041 - BALLOT - n3: <Node: n0> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+548.604012 - BALLOT - n3: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=2 is_passed=False
+548.691034 - CONSENSUS - n3: is passed threshold?: False: <BallotMessage: node=<Node: n0> state=State.accept result=BallotVoteResult.agree message=<Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+548.796892 - SERVER - n3: hand over message to consensus: {"type_name": "ballot-message", "node": "n1", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+548.886061 - CONSENSUS - n3: received data: {"type_name": "ballot-message", "node": "n1", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+549.071074 - CONSENSUS - n3: received data is <BallotMessage: node=<Node: n1> state=State.accept result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+549.143076 - CONSENSUS - n3: State.accept: received ballot_message: <BallotMessage: node=<Node: n1> state=State.accept result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+549.248934 - CONSENSUS - n3: ballot is empty?: False
+549.341917 - CONSENSUS - n3: ballot_message is valid?: True
+549.428940 - BALLOT - n3: <Node: n1> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+549.545050 - BALLOT - n3: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+549.628973 - CONSENSUS - n3: is passed threshold?: False: <BallotMessage: node=<Node: n1> state=State.accept result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+549.726963 - SERVER - n3: hand over message to consensus: {"type_name": "ballot-message", "node": "n2", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+549.847126 - CONSENSUS - n3: received data: {"type_name": "ballot-message", "node": "n2", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+550.048113 - CONSENSUS - n3: received data is <BallotMessage: node=<Node: n2> state=State.accept result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+550.122976 - CONSENSUS - n3: State.accept: received ballot_message: <BallotMessage: node=<Node: n2> state=State.accept result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+550.234079 - CONSENSUS - n3: ballot is empty?: False
+550.323963 - CONSENSUS - n3: ballot_message is valid?: True
+550.444126 - BALLOT - n3: <Node: n2> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+550.549984 - BALLOT - n3: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+550.661087 - CONSENSUS - n3: is passed threshold?: True: <BallotMessage: node=<Node: n2> state=State.accept result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+550.782919 - BALLOT - n3: state changed `accept` -> `all_confirm`
+550.920963 - CONSENSUS - n3: State.all_confirm: <BallotMessage: node=<Node: n2> state=State.accept result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+551.065207 - STORAGE - n3: ballot was added: <Ballot: node=<Node: n3> state=State.all_confirm voted={} node_result=BallotVoteResult.agree is_broadcasted=False>
+551.130056 - BALLOT - n3: ballot is initialized
+551.267147 - MAIN - n3: checking input message was stored: <Message: node=None message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+551.640034 - SERVER - n1: received: ['{"type_name": "ballot-message", "node": "n2", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n3", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+551.738024 - SERVER - n1: hand over message to consensus: {"type_name": "ballot-message", "node": "n2", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+551.813841 - CONSENSUS - n1: received data: {"type_name": "ballot-message", "node": "n2", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+552.047014 - CONSENSUS - n1: received data is <BallotMessage: node=<Node: n2> state=State.accept result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+552.133083 - CONSENSUS - n1: State.accept: received ballot_message: <BallotMessage: node=<Node: n2> state=State.accept result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+552.237988 - CONSENSUS - n1: ballot is empty?: False
+552.322149 - CONSENSUS - n1: ballot_message is valid?: True
+552.417040 - BALLOT - n1: <Node: n2> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+552.556038 - BALLOT - n1: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+552.645206 - CONSENSUS - n1: is passed threshold?: False: <BallotMessage: node=<Node: n2> state=State.accept result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+552.715063 - SERVER - n1: hand over message to consensus: {"type_name": "ballot-message", "node": "n3", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+552.765846 - CONSENSUS - n1: received data: {"type_name": "ballot-message", "node": "n3", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+552.881002 - CONSENSUS - n1: received data is <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+553.014994 - CONSENSUS - n1: State.accept: received ballot_message: <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+553.140879 - CONSENSUS - n1: ballot is empty?: False
+553.230047 - CONSENSUS - n1: ballot_message is valid?: True
+553.287983 - BALLOT - n1: <Node: n3> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+553.359032 - BALLOT - n1: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+553.424835 - CONSENSUS - n1: is passed threshold?: True: <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+553.563833 - BALLOT - n1: state changed `accept` -> `all_confirm`
+553.667068 - CONSENSUS - n1: State.all_confirm: <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+553.797007 - STORAGE - n1: ballot was added: <Ballot: node=<Node: n1> state=State.all_confirm voted={} node_result=BallotVoteResult.agree is_broadcasted=False>
+553.872824 - BALLOT - n1: ballot is initialized
+554.239988 - SERVER - n2: received: ['{"type_name": "ballot-message", "node": "n3", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+554.379940 - SERVER - n2: hand over message to consensus: {"type_name": "ballot-message", "node": "n3", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+554.471970 - CONSENSUS - n2: received data: {"type_name": "ballot-message", "node": "n3", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+554.663897 - CONSENSUS - n2: received data is <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+554.800034 - CONSENSUS - n2: State.accept: received ballot_message: <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+554.938078 - CONSENSUS - n2: ballot is empty?: False
+555.070877 - CONSENSUS - n2: ballot_message is valid?: True
+555.172205 - BALLOT - n2: <Node: n3> voted for <Message: node=n0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+555.333138 - BALLOT - n2: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+555.433035 - CONSENSUS - n2: is passed threshold?: True: <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+555.562973 - BALLOT - n2: state changed `accept` -> `all_confirm`
+555.656910 - CONSENSUS - n2: State.all_confirm: <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+555.837870 - STORAGE - n2: ballot was added: <Ballot: node=<Node: n2> state=State.all_confirm voted={} node_result=BallotVoteResult.agree is_broadcasted=False>
+555.953979 - BALLOT - n2: ballot is initialized
+556.559086 - SERVER - n0: received: ['{"type_name": "ballot-message", "node": "n1", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n2", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}', '{"type_name": "ballot-message", "node": "n3", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}']
+556.659937 - SERVER - n0: hand over message to consensus: {"type_name": "ballot-message", "node": "n1", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+556.756020 - CONSENSUS - n0: received data: {"type_name": "ballot-message", "node": "n1", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+556.957006 - CONSENSUS - n0: received data is <BallotMessage: node=<Node: n1> state=State.accept result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+557.052851 - CONSENSUS - n0: State.accept: received ballot_message: <BallotMessage: node=<Node: n1> state=State.accept result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+557.149887 - CONSENSUS - n0: ballot is empty?: False
+557.280064 - CONSENSUS - n0: ballot_message is valid?: True
+557.409048 - BALLOT - n0: <Node: n1> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+557.587862 - BALLOT - n0: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y')] minimum_quorum=4 agreed=2 is_passed=False
+557.708979 - CONSENSUS - n0: is passed threshold?: False: <BallotMessage: node=<Node: n1> state=State.accept result=BallotVoteResult.agree message=<Message: node=n1 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+557.867050 - SERVER - n0: hand over message to consensus: {"type_name": "ballot-message", "node": "n2", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+557.960033 - CONSENSUS - n0: received data: {"type_name": "ballot-message", "node": "n2", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+558.176041 - CONSENSUS - n0: received data is <BallotMessage: node=<Node: n2> state=State.accept result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+558.260918 - CONSENSUS - n0: State.accept: received ballot_message: <BallotMessage: node=<Node: n2> state=State.accept result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+558.387995 - CONSENSUS - n0: ballot is empty?: False
+558.469772 - CONSENSUS - n0: ballot_message is valid?: True
+558.561087 - BALLOT - n0: <Node: n2> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+558.661222 - BALLOT - n0: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y')] minimum_quorum=4 agreed=3 is_passed=False
+558.778763 - CONSENSUS - n0: is passed threshold?: False: <BallotMessage: node=<Node: n2> state=State.accept result=BallotVoteResult.agree message=<Message: node=n2 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+558.894157 - SERVER - n0: hand over message to consensus: {"type_name": "ballot-message", "node": "n3", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+559.050083 - CONSENSUS - n0: received data: {"type_name": "ballot-message", "node": "n3", "state": "accept", "message": {"hash_id": "6a2c4ae6ed7fd8e209111b30a5f184ccb235d85e", "message_id": "e67022f0f92011e8a65d88e9fe511b8c", "data": "e67020fcf92011e8abd488e9fe511b8c"}, "result": "agree"}
+559.279203 - CONSENSUS - n0: received data is <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+559.391975 - CONSENSUS - n0: State.accept: received ballot_message: <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+559.527874 - CONSENSUS - n0: ballot is empty?: False
+559.634924 - CONSENSUS - n0: ballot_message is valid?: True
+559.745073 - BALLOT - n0: <Node: n3> voted for <Message: node=client0 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>
+559.926033 - BALLOT - n0: threshold checked: threshold=80 voted=[('n0', 'Y'), ('n1', 'Y'), ('n2', 'Y'), ('n3', 'Y')] minimum_quorum=4 agreed=4 is_passed=True
+560.041904 - CONSENSUS - n0: is passed threshold?: True: <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+560.144901 - BALLOT - n0: state changed `accept` -> `all_confirm`
+560.261965 - CONSENSUS - n0: State.all_confirm: <BallotMessage: node=<Node: n3> state=State.accept result=BallotVoteResult.agree message=<Message: node=n3 message_id=e67022f0f92011e8a65d88e9fe511b8c data=e67020fcf9...>>
+560.425997 - STORAGE - n0: ballot was added: <Ballot: node=<Node: n0> state=State.all_confirm voted={} node_result=BallotVoteResult.agree is_broadcasted=False>
+560.549021 - BALLOT - n0: ballot is initialized
+561.453104 - MAIN - > n1: is_exists=True state=State.init ballot=
+571.789980 - MAIN - > n2: is_exists=True state=State.init ballot=
+582.381964 - MAIN - > n3: is_exists=True state=State.init ballot=
+592.981100 - MAIN - > n0: is_exists=True state=State.init ballot=
+^C308.223009 - MAIN - goodbye~
+313.572168 - asyncio - Task was destroyed but it is pending!
+task: <Task pending coro=<check_message_in_storage() done, defined at /Users/z001hmr/MSSE/Fall2018/CMPE273-EntDistSystems/Talk/simple-fba/scripts/simple-fba-simulator.py:26> wait_for=<Future pending cb=[<TaskWakeupMethWrapper object at 0x1109eaac8>()]>>
